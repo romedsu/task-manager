@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   // private apiUrl = 'http://localhost:5000/auth';
   private apiUrl = 'http://localhost:5000/api/auth';
+  
   private authState = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient, private router: Router) {}

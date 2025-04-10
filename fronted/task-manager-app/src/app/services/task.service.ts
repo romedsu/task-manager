@@ -14,7 +14,10 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
-  private apiUrl = environment.apiUrl + '/tasks';
+  
+  //aqui la URL donde funciona
+  // private apiUrl = environment.apiUrl + '/tasks';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -34,8 +37,9 @@ export class TaskService {
       'Authorization',
       `Bearer ${localStorage.getItem('token')}`
     );
-
-    return this.http.post<Task>(this.apiUrl, { title });
+    
+    console.log("pepe3");
+    return this.http.post<Task>(this.apiUrl, { title },{headers});
   }
 
   toggleTask(id: string): Observable<Task> {
