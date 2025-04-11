@@ -29,6 +29,10 @@ export class AuthService {
       .pipe(
         tap((response) => {
           localStorage.setItem('token', response.token);
+          
+          //guardo tb el nombre de usuario el localstorage
+          localStorage.setItem('username', username);
+          
           this.authState.next(true);
         })
       );
@@ -47,4 +51,10 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  getUsername():string | null {
+    return localStorage.getItem('username');
+  }
+
+
 }

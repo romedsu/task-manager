@@ -14,7 +14,6 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
-  
   //aqui la URL donde funciona
   // private apiUrl = environment.apiUrl + '/tasks';
   private apiUrl = environment.apiUrl;
@@ -32,21 +31,27 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiUrl, { headers });
   }
 
+  //devuelve todas las tareas sin login (para la ruta /tasks)
+  getTasksNoLogin(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}/tasks`);
+  }
+
   addTask(title: string): Observable<Task> {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}`
     );
-    
-    console.log("pepe3");
-    return this.http.post<Task>(this.apiUrl, { title },{headers});
+
+    return this.http.post<Task>(this.apiUrl, { title }, { headers });
   }
 
   toggleTask(id: string): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, {});
+    // return this.http.put<Task>(`${this.apiUrl}/${id}`, {});
+    return this.http.put<Task>(`${this.apiUrl}/tasks/${id}`, {});
   }
 
   deleteTask(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    // return this.http.delete(`${this.apiUrl}/tasks/${id}`);
+    return this.http.delete<Task>(`${this.apiUrl}/tasks/${id}`);
   }
 }

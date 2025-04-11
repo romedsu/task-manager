@@ -31,3 +31,14 @@
   text-decoration: line-through;
   color: gray;
   }
+
+  .toolbar {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .active-button {
+    background-color: #63a8f1; 
+    color: white; 
+  }
+  

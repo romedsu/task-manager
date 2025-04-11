@@ -11,6 +11,11 @@ import { AuthService } from '../services/auth.service';
 export class HomePage implements OnInit {
   tasks: Task[] = [];
   newTaskTitle: string = '';
+  username: string | null = '';
+  activeButton: string | null = null;
+
+ 
+
 
   // private authService: AuthService
   // constructor(private taskService: TaskService) {}
@@ -20,10 +25,13 @@ export class HomePage implements OnInit {
   ) {}
   ngOnInit() {
     this.loadTasks();
+    this.username = this.authService.getUsername();
   }
+
   loadTasks() {
     this.taskService.getTasks().subscribe((tasks) => (this.tasks = tasks));
   }
+
   addTask() {
     if (!this.newTaskTitle.trim()) return;
     this.taskService.addTask(this.newTaskTitle).subscribe((task) => {
@@ -31,12 +39,16 @@ export class HomePage implements OnInit {
       this.newTaskTitle = '';
     });
   }
+
   toggleTask(task: Task) {
     this.taskService.toggleTask(task._id!).subscribe((updatedTask) => {
       task.completed = updatedTask.completed;
     });
   }
+
   deleteTask(task: Task) {
+    console.log(`Borrar id: ${task._id}`);
+
     this.taskService.deleteTask(task._id!).subscribe(() => {
       this.tasks = this.tasks.filter((t) => t._id !== task._id);
     });
@@ -44,4 +56,11 @@ export class HomePage implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+
+  
+
+
+
+  
 }

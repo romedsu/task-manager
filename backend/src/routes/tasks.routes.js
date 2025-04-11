@@ -28,7 +28,7 @@ router.get("/tasks", async (req, res) => {
 
 // // Agregar una nueva tarea
 // router.post("/tasks", async (req, res) => {
-  
+
 //   try {
 //     const { title } = req.body;
 
@@ -41,7 +41,6 @@ router.get("/tasks", async (req, res) => {
 //     res.status(500).json({ error: "Error al crear la tarea" });
 //   }
 // });
-
 
 // Marcar una tarea como completada
 router.put("/tasks/:id", async (req, res) => {
@@ -56,6 +55,7 @@ router.put("/tasks/:id", async (req, res) => {
     res.status(500).json({ error: "Error al actualizar la tarea" });
   }
 });
+
 // Eliminar una tarea
 router.delete("/tasks/:id", async (req, res) => {
   try {
