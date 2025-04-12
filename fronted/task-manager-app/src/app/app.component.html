@@ -1,8 +1,6 @@
-<ion-app>
+<!-- <ion-app>
   <ion-router-outlet></ion-router-outlet>
-</ion-app>
-
-
+</ion-app> -->
 
 <!-- MENU HAMBURGUESA LATERAÑ -->
 <!-- <ion-app>
@@ -23,6 +21,7 @@
   <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app> -->
 
+<!-- ------------ -->
 
 <!-- <ion-app>
   <ion-header>
@@ -42,4 +41,89 @@
   <ion-router-outlet></ion-router-outlet>
 </ion-app> -->
 
+<!-- ------------- -->
 
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ titulo }}</ion-title>
+      <!-- <h4>{{username}}</h4> -->
+
+      <ion-buttons slot="end">
+        <!-- <ion-menu-button></ion-menu-button> -->
+
+        <!-- MIS TAREAS -->
+        <ion-button routerLink="/home">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="margin-right: 0.5rem"
+            class="lucide lucide-circle-check-big-icon lucide-circle-check-big"
+          >
+            <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+            <path d="m9 11 3 3L22 4" />
+          </svg>
+          Mis tareas</ion-button
+        >
+
+        <!-- TODAS TAREAS -->
+        <ion-button routerLink="/tasks">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="margin-right: 0.5rem"
+            class="lucide lucide-clipboard-list-icon lucide-clipboard-list"
+          >
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+            <path
+              d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+            />
+            <path d="M12 11h4" />
+            <path d="M12 16h4" />
+            <path d="M8 11h.01" />
+            <path d="M8 16h.01" />
+          </svg>
+          Todas las tareas</ion-button
+        >
+
+        <!-- CERRAR SESION-->
+        <ion-button (click)="logout()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="margin-right: 0.5rem"
+            class="lucide lucide-log-out-icon lucide-log-out"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" x2="9" y1="12" y2="12" />
+          </svg>
+          Cerrar sesión</ion-button
+        >
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>

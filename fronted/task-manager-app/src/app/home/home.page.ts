@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService, Task } from '../services/task.service';
 import { AuthService } from '../services/auth.service';
+import { AppComponent } from '../app.component';
+
 
 @Component({
   selector: 'app-home',
@@ -21,8 +23,11 @@ export class HomePage implements OnInit {
   // constructor(private taskService: TaskService) {}
   constructor(
     private taskService: TaskService,
-    private authService: AuthService
+    private authService: AuthService,
+    private appComponent: AppComponent,
   ) {}
+
+
   ngOnInit() {
     this.loadTasks();
     this.username = this.authService.getUsername();
@@ -58,7 +63,9 @@ export class HomePage implements OnInit {
   }
 
 
-  
+  ionViewWillEnter(){
+    this.appComponent.titulo= 'Mis tareas';
+  }
 
 
 
