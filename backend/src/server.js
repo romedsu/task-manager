@@ -20,6 +20,7 @@ app.use("/api", taskRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/api/auth", authRoutes);
 
+
 app.get("/", (req, res) => {
   res.send("¡Servidor funcionando!");
 });

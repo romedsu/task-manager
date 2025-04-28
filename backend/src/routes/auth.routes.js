@@ -19,6 +19,8 @@ router.post("/register", async (req, res) => {
   }
 });
 
+
+
 // Inicio de sesión
 router.post("/login", async (req, res) => {
   console.log("EOEOE | Solicitud de inicio de sesión recibida");
@@ -32,10 +34,50 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
       expiresIn: "1h",
     });
-    res.json({ token });
+
+    //incluye en la respuesta el token y _id del usuario
+    res.json({ token,_id: user._id});
   } catch (error) {
     res.status(500).json({ error: "Error en el servidor" });
   }
 });
+
+
+// router.get('/users/:id', async (req, res) => {
+//   try {
+//     const { id } = req.params; // Extraer el ID de los parámetros de la URL
+//     const user = await User.findById(id); // Buscar el usuario en la base de datos por su ID
+
+//     if (!user) {
+//       return res.status(404).json({ error: 'Usuario no encontrado' }); // Manejo si no se encuentra el usuario
+//     }
+
+//     res.json(user); // Enviar el usuario encontrado en la respuesta
+//   } catch (error) {
+//     console.error(error); // Imprimir cualquier error en la consola
+//     res.status(500).json({ error: 'Error en el servidor' }); // Manejo de errores del servidor
+//   }
+// });
+
+
+router.get('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params; // Extraer el ID de los parámetros de la URL
+    const user = await User.findById(id); // Buscar el usuario en la base de datos por su ID
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.json(user); // Enviar el usuario encontrado en la respuesta
+  } catch (error) {
+    console.error(error); // Imprimir cualquier error en la consola
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+});
+
+
+
+
 
 module.exports = router;

@@ -23,15 +23,25 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, { username, password });
   }
 
+  // register(username: string, password: string) {
+  //   return this.http.post(`${this.apiUrl}/register`, { username, password }, {
+  //     headers: { 'Content-Type': 'application/json' } // Asegura que los datos se envíen en el formato correcto
+  //   });
+  // }
+
+
+  
+
   login(username: string, password: string) {
     return this.http
-      .post<{ token: string }>(`${this.apiUrl}/login`, { username, password })
+      .post<{ token: string; _id:string }>(`${this.apiUrl}/login`, { username, password })
       .pipe(
         tap((response) => {
           localStorage.setItem('token', response.token);
           
-          //guardo tb el nombre de usuario el localstorage
+          //guardo tb el nombre de usuario y el _id en el localstorage
           localStorage.setItem('username', username);
+          localStorage.setItem('_id', response._id);
           
           this.authState.next(true);
         })
@@ -56,5 +66,9 @@ export class AuthService {
     return localStorage.getItem('username');
   }
 
-
+  getUserId(): string | null {
+    return localStorage.getItem('_id');
+  }
+  
+  
 }

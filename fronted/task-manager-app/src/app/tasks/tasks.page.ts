@@ -17,7 +17,7 @@ export class TasksPage implements OnInit {
   constructor(
     private taskService: TaskService,
     private authService: AuthService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
   ) {}
 
   ngOnInit() {

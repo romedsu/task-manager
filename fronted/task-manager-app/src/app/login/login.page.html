@@ -1,19 +1,39 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-input [(ngModel)]="username" placeholder="Usuario"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input
-      [(ngModel)]="password"
-      type="password"
-      placeholder="Contraseña"
-    ></ion-input>
-  </ion-item>
-  <ion-button expand="full" (click)="login()">Ingresar</ion-button>
+  <div class="logo-inicio">
+    <h1>Bienvenido a <br/><span>TASK MANAGER</span></h1>
+    <ion-img src="../../assets/icon/ardilla_hueso_logo.svg"></ion-img>
+    <h2>Inicio de sesión</h2>
+  </div>
+
+  <ion-card class="card-login">
+    <ion-item>
+      <ion-input [(ngModel)]="username" placeholder="Usuario"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="password"
+        type="password"
+        placeholder="Contraseña"
+      ></ion-input>
+    </ion-item>
+
+    <div class="botones">
+      <ion-button expand="full" (click)="login()">
+        <lucide-icon name="KeyRound" class="icon"></lucide-icon>
+
+        Iniciar sesión</ion-button
+      >
+
+      <ion-button routerLink="/register" class="boton-invertido">
+        <lucide-icon name="UserRoundPlus" class="icon"></lucide-icon>
+        Registrarse</ion-button
+      >
+    </div>
+  </ion-card>
 </ion-content>

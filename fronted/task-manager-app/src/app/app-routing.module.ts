@@ -15,9 +15,26 @@ const routes: Routes = [
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginPageModule),
   },
+  // {
+  //   path: 'tasks',
+  //   loadChildren: () => import('./tasks/tasks.module').then( m => m.TasksPageModule)
+  // },
   {
-    path: 'tasks',
-    loadChildren: () => import('./tasks/tasks.module').then( m => m.TasksPageModule)
+      path: 'tasks',
+      loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    },
+
+    {path:'completed',
+      loadChildren:()=>import('./home/home.module').then( m => m.HomePageModule)
+    },
+    
+    {path:'liked',
+      loadChildren:()=>import('./home/home.module').then( m => m.HomePageModule)
+    },
+
+    {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
 ];
 

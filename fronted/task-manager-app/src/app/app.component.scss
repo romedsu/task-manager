@@ -1,0 +1,57 @@
+@import '../global.scss';
+
+
+
+ion-buttons{
+display: flex;
+justify-content: flex-end;
+gap: .75rem;
+    
+    ion-button{
+        font-size: .85rem;
+        lucide-icon{
+        margin-right: .3rem;
+        // background-color: red;
+        // color: $primary2-color;
+        color: white;
+        
+        opacity: 30%;
+    }    
+}
+
+.iconOut:hover{
+    color: white;
+    opacity: 100%;
+}
+
+}
+
+
+
+.logo {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+  //medida para que aparezca el MENU NORMAL
+    ion-buttons{
+    @media (max-width: 800px) {
+      display: none;
+      }
+}
+
+
+ion-menu-button {
+    display: none;
+    z-index: 100; 
+  }
+  
+  //medida para que aparezca el MENU HAMBURGUESA
+  @media (max-width: 800px) {
+    ion-menu-button {
+      display: block; 
+    }
+  }
+
+ 
+  

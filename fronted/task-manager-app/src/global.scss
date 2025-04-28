@@ -35,3 +35,278 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --ion-color-custom: #d021c4; /* Color personalizado */
+  --ion-color-custom-contrast: #ffffff; /* Contraste para texto */
+}
+
+$primary-color: rgb(102, 58, 204);
+$primary2-color: rgb(130, 93, 216);
+$greyFondo-color: rgb(40, 40, 40);
+$grey1-color: rgb(28, 28, 28);
+$grey2-color: rgb(49, 49, 49);
+$green-color: rgb(0, 127, 95);
+$red-color: rgb(208, 0, 0);
+
+:root {
+  --primary-color: rgb(102, 58, 204);
+  --primary2-color: rgb(130, 93, 216);
+  --greyFondo-color: rgb(40, 40, 40);
+  --grey1-color: rgb(28, 28, 28);
+  --green-color: rgb(43, 147, 72);
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+ion-app {
+  --background: $greyFondo-color;
+  background-color: $greyFondo-color;
+}
+
+ion-toolbar {
+  color: white;
+  
+}
+
+ion-router-outlet {
+  margin-top: 3.5rem;
+  // margin:0 auto;
+  // max-width: 1024px;
+}
+
+ion-toolbar {
+  --background: $primary-color;
+  background-color: $primary-color;
+}
+
+ion-button {
+  --background: $primary-color;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  &:hover {
+    --background: $primary2-color;
+    background-color: $primary2-color;
+    transition: 0.3s;
+  }
+}
+
+
+
+//MENU
+.menu {
+  display: flex;
+  flex-direction: row;
+ 
+  
+  
+  // background-color: red;
+  ion-img {
+    margin-left: 3rem;
+    cursor: pointer;
+  }
+  
+  ion-title {
+      
+        margin: 0;
+        font-weight: 700;
+        
+        padding-top: .2rem;
+    }
+    
+}
+
+
+// ----------------
+
+
+//LOGIN / REGISTER
+
+.logo-inicio{
+  display: flex;
+  flex-direction: column;
+
+
+  h1{
+      // width: 40%;
+      
+      text-align: center;
+      font-weight: 100;
+      font-size: 1.5rem;
+      margin: .5rem auto ;
+      padding-bottom: 1rem;
+      span{
+        color: $primary-color ;
+        font-weight: 800;
+        font-size: 2rem;
+      }
+      
+      border-bottom: 1px solid $primary-color;
+  }
+  
+  ion-img{
+      width: 7rem;
+      margin: auto ;
+  }
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.card-login {
+  width: 25rem;
+  margin:auto;
+  padding: 1rem;
+  // --background: $grey1-color;
+  // background-color: $grey1-color;
+
+  border: 0.15rem solid $primary-color;
+  border-radius: 0.5rem;
+
+  ion-item{
+    ion-input{
+    font-size: .85rem; 
+    }
+  }
+  
+.botones{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // justify-content: center;
+}
+
+.botones ion-button {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    font-size: .7rem;
+    // para ocular salientes en las esquians y sombra no deseada
+    overflow: hidden;
+    
+   
+  }
+}
+.boton-invertido {
+  // border: .2rem solid $primary-color;
+  box-shadow: inset 0 0 0 2px $primary-color;
+  // box-shadow: none !important;
+  --background: $grey1-color;
+  background-color: $grey1-color;
+  
+
+  &:hover {
+    box-shadow: none;
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+}
+
+// ----------
+
+.bienvenido {
+  display: inline-flex;
+
+  // width: 150px;
+
+  text-align: right;
+  color: white;
+  background-color: $primary-color;
+  font-weight: 700;
+
+  // justify-content: flex-end;
+
+  // display: inline-block;
+  padding: 0.3rem 0.5rem;
+
+  border-radius: 0.5rem;
+
+  margin-top: 0rem;
+  // padding-left: -1rem;
+
+  // align-self: end;
+
+  margin-left: auto;
+
+  .icon {
+    margin-right: 0.3rem;
+  }
+}
+
+//MENSAJES FEEDBACK
+.alert-wrapper {
+  background-color: $grey1-color;
+
+  border: 0.15rem solid $primary-color;
+  padding: 0.5rem;
+ 
+
+  .alert-title {
+    font-size: 1rem;
+  }
+  .alert-button {
+    background-color: $primary-color;
+    // color:$primary-color;
+    color: white;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      background-color: white;
+      // color: white;
+      color: $primary-color;
+    }
+  }
+}
+
+.green {
+  .alert-wrapper {
+    border: 0.15rem solid $green-color;
+    border-radius: 0.5rem;
+  }
+}
+.red {
+  .alert-wrapper {
+    border: 0.15rem solid $red-color;
+    border-radius: 0.5rem;
+  }
+}
+
+
+@media (prefers-color-scheme: light) {
+  h3 {
+    // color:rgb(29, 29, 29);
+
+    color: rgb(25, 25, 25) !important;
+  }
+
+  .task-card {
+    &:hover {
+      background-color: rgb(233, 219, 239) !important;
+    }
+  }
+
+  .card-login {
+    .boton-invertido{
+      --background: transparent;
+  background-color: transparent;
+  color: $primary-color;
+
+    }
+  }
+}

@@ -9,6 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import {  provideHttpClient } from '@angular/common/http';
 
+import { LucideAngularModule,CircleCheckBig,ClipboardList, BookmarkCheck,Heart, LogOut} from 'lucide-angular';
+
+
+
 
 
 
@@ -18,6 +22,8 @@ imports: [
 BrowserModule,
 IonicModule.forRoot(),
 AppRoutingModule,
+LucideAngularModule.pick({ CircleCheckBig,ClipboardList, BookmarkCheck,Heart,LogOut })
+
 ],
 providers: [
     provideHttpClient(), // Agregamos el módulo HTTP
