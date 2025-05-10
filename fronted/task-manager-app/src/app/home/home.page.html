@@ -1,30 +1,206 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Gestor de Tareas</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">Cerrar sesión</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-input [(ngModel)]="newTaskTitle" placeholder="Nueva tarea"></ion-input>
-    <ion-button (click)="addTask()">Añadir</ion-button>
-  </ion-item>
-  <ion-list>
-    <ion-item *ngFor="let task of tasks">
-      <ion-label [class.completed]="task.completed">
-        {{ task.title }}
+  <ion-header class="encabezado">
+    <!-- <ion-searchbar animated="true" placeholder="Buscar" class="buscador"></ion-searchbar> -->
+    <ion-title
+      >{{titulo}}
+      <p class="subtitulo">{{subtitulo}}</p>
+    </ion-title>
+
+    <!-- <h1>{{titulo}}</h1> -->
+
+    <div class="bienvenido">
+      <lucide-icon name="User" class="icon"></lucide-icon>
+      {{username}}
+    </div>
+  </ion-header>
+
+  <!-- ------------------ -->
+
+  <div class="contenedor-grid">
+    <!-- FORM -> NUEVA TAREA -->
+    <ion-card class="form">
+      <h3>Nueva Tarea</h3>
+
+      <ion-label>
+        <p>Titulo:</p>
+        <ion-input
+          class="input"
+          [(ngModel)]="newTaskTitle"
+          placeholder="(Obligatorio)"
+        ></ion-input>
       </ion-label>
-      <ion-checkbox
-        slot="end"
-        [(ngModel)]="task.completed"
-        (ionChange)="toggleTask(task)"
-      ></ion-checkbox>
-      <ion-button color="danger" fill="clear" (click)="deleteTask(task)">
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+
+      <ion-label>
+        <p>Descripción:</p>
+        <ion-input
+          class="input"
+          [(ngModel)]="newTaskDescription"
+          type="text"
+          placeholder="(Opcional)"
+        ></ion-input>
+      </ion-label>
+
+      <ion-label>
+        <p>Fecha fin: <span>(Opcional)</span></p>
+
+        <!-- Metodo que para mostar calendario al clickar en el boton-fecha
+        cambio el estado del booleano (calendario) -> si esta falso, activa el css (calendarioCSS) display:none
+        si cambia a true, muestra el calendario -->
+        <ion-button
+          class="boton-fecha"
+          (click)="mostrarCalendario()"
+          title="Calendario"
+        >
+          <ion-icon name="calendar"></ion-icon>
+        </ion-button>
+        <ion-datetime
+          #calendarioID
+          [ngClass]="{calendarioCSS:!calendario}"
+          [(ngModel)]="newFechaFin"
+        ></ion-datetime>
+      </ion-label>
+
+      <ion-button (click)="addTask()">Añadir</ion-button>
+    </ion-card>
+
+    <!-- ----------------<>---------------- -->
+
+    <!-- ----------------<LISTADO>---------------- -->
+
+    <!-- ngClass noOwner para las tareas que no son del usuario logueado -->
+    <ion-list class="task-list">
+      <h3>Tablón Tareas</h3>
+
+      <!-- ordenar -->
+      <div class="ordenar">
+        <!-- <ion-icon name="arrow-down-outline"></ion-icon> -->
+        <ion-select
+          placeholder="Ordenar por"
+          (ionChange)="ordenarLista($event)"
+          justify="end"
+          interface="popover"
+          
+        >
+          <ion-select-option value="desc">Nuevas</ion-select-option>
+          <ion-select-option value="asc">Antiguas</ion-select-option>
+        </ion-select>
+      </div>
+
+      <p *ngIf="tasks.length === 0">No hay tareas creadas</p>
+
+      <ion-card
+        [class.completed]="task.completed"
+        *ngFor="let task of tasks"
+        class="task-card"
+        [ngClass]="{'noOwner': task.userId !== userId}"
+      >
+        <ion-card-header>
+          <div class="card-header--info">
+            <ion-card-subtitle>
+              <lucide-icon name="calendar" class="icon"></lucide-icon>
+              <span> Creada: </span>
+              <span [ngClass]="'fecha'">
+                {{task.createdAt | date:'dd-MM-yy ' }}
+              </span>
+              <span [ngClass]="'hora'">
+                {{task.createdAt | date:' | hh:mm' }}
+              </span>
+            </ion-card-subtitle>
+
+            <ion-card-subtitle>
+              <lucide-icon name="user" class="icon"></lucide-icon>
+              {{task.autor}}
+            </ion-card-subtitle>
+          </div>
+
+          <!-- titulo | descripcion -->
+          <ion-card-title>
+            <!-- {{ task.title }} -->
+            <input
+              [(ngModel)]="task.title"
+              [disabled]="!editable"
+              (blur)="updateTask(task)"
+              [ngClass]="{noInput:!editable}"
+            />
+          </ion-card-title>
+          <ion-card-content
+            *ngIf="task.description"
+            class="card-content--description"
+          >
+            <!-- {{task.description}} -->
+
+            <textarea
+              [(ngModel)]="task.description"
+              [disabled]="!editable"
+              (blur)="updateTask(task)"
+              [ngClass]="{noInput:!editable}"
+            >
+            </textarea>
+          </ion-card-content>
+
+          <ion-card-content [(ngModel)]="task.dateFinal" class="date-fin">
+            <!-- fecha final -->
+            <ion-card-subtitle *ngIf="task.dateFinal">
+              <lucide-icon
+                name="calendar"
+                class="icon calendar-final"
+              ></lucide-icon>
+              <span> Finaliza: </span>
+
+              <span [ngClass]="'fecha'">
+                {{task.dateFinal | date:'dd-MM-yy ' }}
+              </span>
+              <span [ngClass]="'hora'">
+                {{task.dateFinal | date:'| hh:mm' }}
+              </span>
+            </ion-card-subtitle>
+          </ion-card-content>
+        </ion-card-header>
+
+        <!-- <ion-datetime></ion-datetime> -->
+
+        <!-- botones-editar-borrar -->
+
+        <ion-card-content *ngIf="task.userId === userId">
+          <!-- like -->
+
+            <!-- <ion-icon 
+            name="heart-outline" 
+            (click)="likeTask(task)"
+            class="like"
+            role="button"
+            ></ion-icon> -->
+
+            <!-- ternario para cambiar el icono segun su estado (true o false) -->
+            <ion-icon 
+            [name]="task.liked ? 'heart' : 'heart-outline'"  
+            (click)="likeTask(task)"
+            [ngClass]="{'liked': task.liked}" 
+            class="like"
+            role="button"
+          ></ion-icon>
+
+          <ion-checkbox
+            slot="end"
+            [(ngModel)]="task.completed"
+            (ionChange)="toggleTask(task)"
+          >
+            <!-- <lucide-icon name="circle-check" class="icon"></lucide-icon> -->
+            <span>Completada</span>
+          </ion-checkbox>
+
+          <ion-button (click)="editActive()" class="button-edit" title="Editar">
+            <lucide-icon name="pencil" class="button-edit icon"></lucide-icon>
+
+            <!-- <ion-icon name="pencil" class="icon"></ion-icon> -->
+          </ion-button>
+
+          <ion-button fill="clear" (click)="deleteTask(task)" title="Borrar">
+            <!-- <ion-icon name="trash"></ion-icon> -->
+            <lucide-icon name="trash" class="icon"></lucide-icon>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
 </ion-content>

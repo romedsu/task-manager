@@ -1,3 +1,124 @@
-<ion-app>
+<!-- <ion-app>
   <ion-router-outlet></ion-router-outlet>
+</ion-app> -->
+
+<!-- MENU HAMBURGUESA LATERAÑ -->
+<!-- <ion-app>
+  <ion-menu side="start" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/home">Inicio</ion-item>
+        <ion-item routerLink="/tasks">Tareas</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app> -->
+
+<!-- ------------ -->
+
+<!-- <ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Gestor de Tareas</ion-title>
+      <ion-buttons slot="start">
+       
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button routerLink="/home">Inicio</ion-button>
+        <ion-button routerLink="/tasks">Tareas</ion-button>
+       
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-router-outlet></ion-router-outlet>
+</ion-app> -->
+
+<!-- ------------- -->
+
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-menu-button slot="end"></ion-menu-button>
+      <!-- Botón para abrir el menú -->
+
+      <div class="menu">
+        <ion-img
+          src="../assets/icon/ardilla_hueso_logo.svg"
+          class="logo"
+          routerLink="/home"
+        ></ion-img>
+        <ion-title routerLink="/home">TASK MANAGER</ion-title>
+      </div>
+
+      <ion-buttons slot="end" *ngIf="!esLogin">
+        <!-- <ion-menu-button></ion-menu-button> -->
+
+        <!-- MIS TAREAS -->
+        <ion-button routerLink="/home">
+          <lucide-icon name="circle-check-big" class="icon"></lucide-icon>
+          Mis tareas</ion-button
+        >
+
+        <!-- TODAS TAREAS -->
+        <ion-button routerLink="/tasks">
+          <lucide-icon name="clipboard-list" class="icon"></lucide-icon>
+          Todas</ion-button
+        >
+
+        <!-- COMPLETADAS -->
+        <ion-button routerLink="/completed">
+          <lucide-icon name="bookmark-check" class="icon"></lucide-icon>
+          Completadas</ion-button
+        >
+        <!-- LIKES -->
+        <ion-button routerLink="/liked">
+          <lucide-icon name="heart" class="icon"></lucide-icon>
+          Favs</ion-button
+        >
+
+        <!-- CERRAR SESION-->
+        <ion-button (click)="logout()">
+          <lucide-icon name="log-out" class="icon iconOut"></lucide-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- MENÚ LATERAL -->
+  <ion-menu side="end" contentId="hamburguesa">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/home">
+          <lucide-icon name="circle-check-big" class="icon"></lucide-icon>
+          Mis tareas
+        </ion-item>
+
+        <ion-item routerLink="/tasks">
+          <lucide-icon name="clipboard-list" class="icon"></lucide-icon>
+          Todas las tareas
+        </ion-item>
+
+        <ion-item (click)="logout()">
+          <lucide-icon name="log-out" class="icon iconOut"></lucide-icon>
+          Cerrar sesión
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="hamburguesa"></ion-router-outlet>
 </ion-app>

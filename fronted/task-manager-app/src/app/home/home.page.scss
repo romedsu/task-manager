@@ -1,3 +1,5 @@
+@import "../../global.scss";
+
 #container {
   text-align: center;
 
@@ -26,8 +28,471 @@
   text-decoration: none;
 }
 
-
 .completed {
   text-decoration: line-through;
   color: gray;
+
+  // box-shadow: inset 0 0 0 2px rgb(47, 194, 42);
+  opacity: 60%;
+
+  .completed ion-checkbox {
+    opacity: 100% !important;
   }
+}
+
+ion-checkbox {
+  span {
+    margin-right: 0;
+  }
+  &::part(container) {
+    border-radius: 50%;
+  }
+}
+
+.completed ion-checkbox {
+  // --size: 3rem;
+
+  --checkbox-background-checked: rgb(47, 213, 35);
+  --opacity: 100%;
+
+  &::part(container) {
+    border: 1px solid rgb(47, 213, 35);
+  }
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.active-button {
+  background-color: $primary-color;
+  color: white;
+}
+
+// -------------<>-------------
+
+// CONTENEDOR PRINCIPAL
+// ion-content{
+//
+
+// }
+
+//HEADER
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 0.75rem 0;
+  box-shadow: none;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  ion-title {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .subtitulo {
+    font-size: 1rem;
+    color: $primary2-color;
+    margin: 0;
+  }
+}
+ion-searchbar.buscador {
+  --background: #2b2b2b;
+  --color: #fff;
+  --placeholder-color: #fff;
+  --icon-color: rgb(102, 58, 204);
+  --clear-button-color: #fff;
+  width: 30%;
+
+  --border-radius: 0.5rem;
+}
+
+ion-searchbar.ios.custom {
+  --cancel-button-color: #19422d;
+}
+
+ion-searchbar.md.custom {
+  --cancel-button-color: #fff;
+}
+
+//CONTENEDOR contenido
+.contenedor-grid {
+  display: grid;
+  grid-template-areas: "list new";
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  // height: 100%;
+  // background-color: aqua;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    // OPCION GRID
+    // display: grid;
+    // grid-template-areas:
+    //   "new" "list"
+    //   ;
+    // grid-template-columns: 1fr;
+
+    .task-list {
+      width: 100%;
+    }
+  }
+}
+
+h3 {
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  // background-color: $primary-color;
+  box-shadow: inset 0 0 0 2px $primary-color;
+  margin: 0;
+}
+
+// -----------
+// TASKS
+//lista tasks
+.task-list {
+  grid-area: list;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2.5rem auto;
+  gap: 1.5rem;
+  padding: 2rem;
+  // margin: 1rem 0;
+  box-shadow: inset 0 0 0 2px $grey2-color;
+  border-radius: 0.5rem;
+
+  h3 {
+    grid-column: 1/-1;
+    height: 2.5rem;
+  }
+
+  .ordenar {
+    grid-column: 1/-1;
+    grid-row: 0.5rem;
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-top: 0;
+    font-size: 0.95rem;
+    text-align: right;
+    // height: .1rem;
+  
+  
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  // @media (max-width: 768px) {
+  //   grid-template-columns: repeat(2, 1fr);
+  // }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+//tarjeta task
+.task-card {
+  display: flex;
+  flex-direction: column;
+  // height: 100%;
+
+  box-shadow: inset 0 0 0 0.2rem $primary-color;
+  border-radius: 0.5rem;
+  // margin-bottom: 3rem;
+
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+
+  &:hover {
+    scale: 1.02;
+    transition: 0.3s;
+    // background-color: $grey2-color;
+    background-color: rgb(35, 15, 53);
+  }
+
+  div {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  ion-card-header {
+    padding-bottom: 0;
+  }
+
+  ion-card-subtitle {
+    // color:red;
+    font-size: 0.8rem;
+    text-align: end;
+    display: flex;
+
+    span {
+      margin-right: 0.5rem;
+    }
+
+    .icon {
+      color: $primary-color;
+      margin-right: 0.4rem;
+    }
+
+    .hora {
+      // color: red;
+      font-weight: 300;
+    }
+
+    .fecha {
+      font-weight: 600;
+    }
+  }
+
+  ion-card-title {
+    font-size: 1rem;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $grey2-color;
+  }
+
+  ion-card-content {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.8rem;
+    padding-top: 0.4rem;
+
+    margin-top: auto;
+
+    ion-checkbox {
+      margin-right: 1rem;
+    }
+
+    ion-button {
+      color: white;
+      width: 2.5rem;
+      height: 2rem;
+
+      &:hover {
+        background-color: $grey1-color;
+        color: rgb(200, 78, 78);
+      }
+
+      .icon {
+        width: 1rem;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+ion-button {
+  .button-edit {
+    width: 1rem;
+    margin-right: 0;
+    &:hover {
+      color: rgb(47, 214, 97);
+    }
+  }
+}
+
+.card-header--info {
+  // border-bottom: 2px solid $grey2-color;
+  border-bottom: 1px solid $primary-color;
+  padding-bottom: 0.75rem;
+}
+
+ion-card-title input {
+  padding: 0.3rem;
+}
+
+.card-content--description {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $grey2-color;
+}
+.card-content--description textarea {
+  width: 100%;
+  min-height: 1rem;
+  height: auto;
+  resize: none;
+  // overflow-y: auto;
+
+  padding-left: 1rem;
+  padding: 0.25rem 0;
+  margin-right: 0;
+  text-align: end;
+
+  box-sizing: border-box;
+}
+
+.card-content--description textarea:not(:disabled),
+ion-card-title input:not(:disabled) {
+  background-color: rgb(32, 18, 46);
+  color: white;
+  border: 1px solid rgb(162, 0, 255);
+  border-radius: 0.5rem;
+}
+
+.noOwner {
+  box-shadow: inset 0 0 0 2px $grey2-color;
+}
+
+.noInput {
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+  // color: transparent;
+}
+
+.date-fin {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: left !important;
+  padding-left: 0;
+
+  ion-card-subtitle {
+    margin-bottom: 0rem;
+    .calendar-final {
+      color: rgb(145, 59, 59);
+    }
+  }
+}
+
+// ------------
+//FORM (inputs)
+.form {
+  grid-area: new;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  // margin-bottom: 2rem;
+  padding: 2rem 2rem 1.5em;
+
+  // background-color: $grey1-color;
+  box-shadow: inset 0 0 0 2px $grey2-color;
+  border-radius: 0.5rem;
+
+  align-self: start; //importante --> para que solo ocupe el alto que necesite por su contenidp
+
+  //para que aunque se haga scroll, siempre este arriba
+  position: sticky;
+  top: 1rem;
+
+  h3 {
+    color: white;
+  }
+
+  ion-label {
+    p {
+      // margin: 0 0.5rem;
+      font-size: 0.9rem;
+      //  color: $primary-color;
+      font-weight: 500;
+      span {
+        font-size: 0.8rem;
+        font-weight: 200;
+        margin-left: 0.4rem;
+      }
+    }
+  }
+
+  ion-input {
+    // background-color: $grey1-color;
+    box-shadow: inset 0 0 0 2px $grey2-color;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+  .input {
+    color: white;
+    opacity: 60%;
+    font-size: 0.8rem;
+  }
+
+  ion-button {
+    width: 25%;
+    align-self: flex-end; //-> botón a la derecha
+    margin-top: 0;
+  }
+
+  .boton-fecha {
+    width: 3rem;
+  }
+}
+
+//ESTILOS CALENDARIO
+
+
+.calendarioCSS {
+  display: none;
+
+}
+
+ion-datetime::part(calendar-day) {
+  color: $primary-color;
+}
+
+ion-datetime::part(calendar-day today) {
+  color: #ffffff;
+  border: 1px solid $primary-color;
+}
+
+ion-datetime::part(calendar-day):focus {
+  background-color: rgb(198, 60, 60);
+  box-shadow: 0px 0px 0px 4px rgb(154 209 98 / 0.1);
+  color: #ffffff;
+}
+
+
+
+// ion-input::placeholder{
+//   padding-left: 2rem;
+//   margin-left: 2rem;
+//   color: red;
+// }
+
+
+// .like{
+//   --background: transparent;
+//   // cursor: pointer;
+//   &:hover{
+//     color: rgb(198, 60, 60);
+//   }
+
+ 
+// }
+
+.like {
+  // --background: transparent;
+  // color: gray; 
+  font-size: 1.2rem;
+
+margin-right: 8.7rem;
+// justify-self: flex-start;
+
+  &.liked { 
+    color: rgb(198, 60, 60); 
+  }
+
+  &:hover {
+    color: rgb(255, 100, 100); 
+  }
+}

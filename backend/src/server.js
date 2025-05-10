@@ -16,6 +16,11 @@ connectDB();
 const taskRoutes = require("./routes/tasks.routes");
 app.use("/api", taskRoutes);
 
+//importar rutas autentificacion
+const authRoutes = require("./routes/auth.routes");
+app.use("/api/auth", authRoutes);
+
+
 app.get("/", (req, res) => {
   res.send("¡Servidor funcionando!");
 });
